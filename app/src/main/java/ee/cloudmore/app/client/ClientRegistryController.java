@@ -1,9 +1,10 @@
 package ee.cloudmore.app.client;
 
+import ee.cloudmore.app.client.model.ClientDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
@@ -15,6 +16,11 @@ public class ClientRegistryController {
     @GetMapping("test")
     public Object test() {
         return clientRegistryService.test();
+    }
+
+    @PostMapping
+    public Object test(@RequestBody @Valid ClientDto clientDto) {
+        return clientRegistryService.test(clientDto);
     }
 
 }

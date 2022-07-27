@@ -10,4 +10,8 @@ public class ClientRegistryService {
         return new ClientDto().setName("it works!");
     }
 
+    public ClientDto test(ClientDto clientDto) {
+        return clientDto;
+    }
+
 }
