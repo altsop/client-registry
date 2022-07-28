@@ -1,6 +1,6 @@
 package ee.cloudmore.app.client;
 
-import ee.cloudmore.app.client.model.ClientDto;
+import ee.cloudmore.app.client.model.ClientRegistrationDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,8 +19,8 @@ public class ClientRegistryController {
     }
 
     @PostMapping
-    public Object test(@RequestBody @Valid ClientDto clientDto) {
-        return clientRegistryService.test(clientDto);
+    public void test(@RequestBody @Valid ClientRegistrationDto clientRegistrationDto) {
+        clientRegistryService.registerClient(clientRegistrationDto);
     }
 
 }

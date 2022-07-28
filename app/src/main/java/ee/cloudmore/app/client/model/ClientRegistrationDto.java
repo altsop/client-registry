@@ -12,7 +12,7 @@ import java.time.OffsetDateTime;
 @Data
 @Validated
 @Accessors(chain = true)
-public class ClientDto {
+public class ClientRegistrationDto {
 
     @NotBlank
     private String name;
