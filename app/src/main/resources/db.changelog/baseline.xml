@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.7.xsd"
+                   logicalFilePath="changelog/baseline.xml">
+
+    <changeSet id="2022-07-29-0000-client-table" author="aleksei.tsypov">
+        <sql>
+            CREATE TABLE Client
+            (
+                id        BINARY(16) NOT NULL PRIMARY KEY,
+                name      VARCHAR(256)   NOT NULL,
+                surname   VARCHAR(256)   NOT NULL,
+                wage      DECIMAL(10, 2) NOT NULL,
+                eventTime DATETIME       NOT NULL
+            )
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>
