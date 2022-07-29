@@ -7,13 +7,13 @@
 
     <changeSet id="2022-07-29-0000-client-table" author="aleksei.tsypov">
         <sql>
-            CREATE TABLE Client
+            CREATE TABLE client
             (
-                id        BINARY(16) NOT NULL PRIMARY KEY,
-                name      VARCHAR(256)   NOT NULL,
-                surname   VARCHAR(256)   NOT NULL,
-                wage      DECIMAL(10, 2) NOT NULL,
-                eventTime DATETIME       NOT NULL
+                uuid       BINARY(16) NOT NULL PRIMARY KEY,
+                name       VARCHAR(256)   NOT NULL,
+                surname    VARCHAR(256)   NOT NULL,
+                wage       DECIMAL(10, 2) NOT NULL,
+                event_time DATETIME       NOT NULL
             )
         </sql>
     </changeSet>

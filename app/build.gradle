@@ -8,7 +8,6 @@ plugins {
 
 ext {
     openApiVersion = "1.6.9"
-    mapStructVersion = "1.5.2.Final"
 }
 
 dependencies {
@@ -20,7 +19,6 @@ dependencies {
             "org.springdoc:springdoc-openapi-ui:$openApiVersion",
 
             "org.springframework.kafka:spring-kafka",
-            "org.mapstruct:mapstruct:$mapStructVersion",
 
             "mysql:mysql-connector-java",
             "org.liquibase:liquibase-core"
@@ -31,20 +29,13 @@ dependencies {
     )
 
     annotationProcessor(
-            "org.springframework.boot:spring-boot-configuration-processor",
-            "org.mapstruct:mapstruct-processor:$mapStructVersion"
+            "org.springframework.boot:spring-boot-configuration-processor"
     )
 
     compileOnly(
             "org.springframework.boot:spring-boot-configuration-processor"
     )
 
-}
-
-tasks.withType(JavaCompile) {
-    options.compilerArgs = [
-            '-Amapstruct.suppressGeneratorTimestamp=true'
-    ]
 }
 
 tasks.named('test') {
