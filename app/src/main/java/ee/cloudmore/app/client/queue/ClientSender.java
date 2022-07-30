@@ -1,6 +1,5 @@
 package ee.cloudmore.app.client.queue;
 
-import ee.cloudmore.app.client.config.TopicProperties;
 import ee.cloudmore.app.client.model.ClientRegistrationDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class ClientRegistrationSender {
+public class ClientSender {
 
     private final TopicProperties properties;
     private final KafkaTemplate<String, ClientRegistrationDto> clientTemplate;

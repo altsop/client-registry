@@ -1,4 +1,4 @@
-package ee.cloudmore.app.client.config;
+package ee.cloudmore.app.client.queue;
 
 import lombok.RequiredArgsConstructor;
 import org.apache.kafka.clients.admin.NewTopic;
