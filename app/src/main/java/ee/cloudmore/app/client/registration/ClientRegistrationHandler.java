@@ -6,11 +6,13 @@ import ee.cloudmore.app.client.model.ClientRegistrationDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 
 @Component
+@Transactional
 @RequiredArgsConstructor
 public class ClientRegistrationHandler {
 
@@ -19,7 +21,7 @@ public class ClientRegistrationHandler {
     private final ClientRepository registrationRepository;
     private final ClientRegistrationProperties clientRegistrationProperties;
 
-    public void process(ClientRegistrationDto clientRegistrationDto) {
+    public Client process(ClientRegistrationDto clientRegistrationDto) {
         BigDecimal wageWithTax = calculateWageWithTax(clientRegistrationDto);
 
         Client client = new Client()
@@ -28,7 +30,7 @@ public class ClientRegistrationHandler {
                 .setWage(wageWithTax)
                 .setEventTime(clientRegistrationDto.getEventTime());
 
-        registrationRepository.save(client);
+        return registrationRepository.save(client);
     }
 
     private BigDecimal calculateWageWithTax(ClientRegistrationDto clientRegistrationDto) {

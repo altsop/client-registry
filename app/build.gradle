@@ -24,16 +24,18 @@ dependencies {
             "org.liquibase:liquibase-core"
     )
 
-    testImplementation(
-            "org.springframework.boot:spring-boot-starter-test"
-    )
-
     annotationProcessor(
             "org.springframework.boot:spring-boot-configuration-processor"
     )
 
     compileOnly(
             "org.springframework.boot:spring-boot-configuration-processor"
+    )
+
+    testImplementation(
+            "org.springframework.boot:spring-boot-starter-test",
+            "org.testcontainers:mysql:1.17.3",
+            "org.testcontainers:kafka:1.17.3"
     )
 
 }
