@@ -1,15 +1,16 @@
-package ee.cloudmore.app.client.registration;
+package ee.cloudmore.app.unit.registration;
 
 import ee.cloudmore.app.client.ClientRepository;
 import ee.cloudmore.app.client.model.Client;
 import ee.cloudmore.app.client.model.ClientRegistrationDto;
+import ee.cloudmore.app.client.registration.ClientRegistrationHandler;
+import ee.cloudmore.app.client.registration.ClientRegistrationProperties;
+import ee.cloudmore.app.unit.UnitTestBase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
@@ -18,8 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@ExtendWith(MockitoExtension.class)
-class ClientRegistrationHandlerTest {
+class ClientRegistrationHandlerUnitTest extends UnitTestBase {
 
     @Mock
     ClientRepository clientRepository;

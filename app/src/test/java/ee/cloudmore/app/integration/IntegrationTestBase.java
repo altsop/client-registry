@@ -1,4 +1,4 @@
-package ee.cloudmore.app;
+package ee.cloudmore.app.integration;
 
 
 import org.springframework.boot.test.context.SpringBootTest;

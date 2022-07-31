@@ -1,8 +1,9 @@
-package ee.cloudmore.app.client.registration;
+package ee.cloudmore.app.integration.registration;
 
-import ee.cloudmore.app.IntegrationTestBase;
 import ee.cloudmore.app.client.model.Client;
 import ee.cloudmore.app.client.model.ClientRegistrationDto;
+import ee.cloudmore.app.client.registration.ClientRegistrationHandler;
+import ee.cloudmore.app.integration.IntegrationTestBase;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.TestPropertySource;
