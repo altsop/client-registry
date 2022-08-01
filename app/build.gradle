@@ -35,11 +35,41 @@ dependencies {
     testImplementation(
             "org.springframework.boot:spring-boot-starter-test",
             "org.testcontainers:mysql:1.17.3",
-            "org.testcontainers:kafka:1.17.3"
+            "org.testcontainers:kafka:1.17.3",
+            "io.rest-assured:rest-assured",
+            "org.awaitility:awaitility",
+            "org.testcontainers:junit-jupiter:1.17.3"
     )
 
 }
 
-tasks.named('test') {
-    useJUnitPlatform()
+test {
+    useJUnitPlatform() {
+        excludeTags 'integration-test', 'e2e-test'
+    }
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
+
+task integrationTest(type: Test) {
+    group = 'verification'
+    description = "Run slower integration tests"
+    useJUnitPlatform {
+        includeTags 'integration-test'
+    }
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
+
+task e2eTest(type: Test) {
+    group = 'verification'
+    description = "Run the slowest e2e test"
+    useJUnitPlatform {
+        includeTags 'e2e-test'
+    }
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
 }
