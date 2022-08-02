@@ -6,6 +6,10 @@ plugins {
     id "io.spring.dependency-management" version "1.0.12.RELEASE"
 }
 
+archivesBaseName = 'client-registry'
+version = '1.0'
+group = 'ee.cloudmore'
+
 ext {
     openApiVersion = "1.6.9"
 }
