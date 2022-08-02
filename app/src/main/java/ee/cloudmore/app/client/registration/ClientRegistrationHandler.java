@@ -27,11 +27,6 @@ public class ClientRegistrationHandler {
     public Client process(ClientRegistrationDto clientRegistrationDto) {
         BigDecimal wageWithTax = calculateWageWithTax(clientRegistrationDto);
 
-        if (isDuplicate(clientRegistrationDto, wageWithTax)) {
-            log.warn("Attempt to register client twice: {}", clientRegistrationDto);
-            return null;
-        }
-
         Client client = new Client()
                 .setName(clientRegistrationDto.getName())
                 .setSurname(clientRegistrationDto.getSurname())
@@ -39,14 +34,6 @@ public class ClientRegistrationHandler {
                 .setEventTime(clientRegistrationDto.getEventTime());
 
         return clientRepository.save(client);
-    }
-
-    private boolean isDuplicate(ClientRegistrationDto clientRegistrationDto, BigDecimal wageWithTax) {
-        List<Client> clients = clientRepository.findAllByEventTime(clientRegistrationDto.getEventTime());
-        return clients.stream()
-                .anyMatch(client -> client.getName().equals(clientRegistrationDto.getName()) &&
-                        client.getSurname().equals(clientRegistrationDto.getSurname()) &&
-                        client.getWage().compareTo(wageWithTax) == 0);
     }
 
     private BigDecimal calculateWageWithTax(ClientRegistrationDto clientRegistrationDto) {

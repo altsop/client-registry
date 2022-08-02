@@ -63,25 +63,4 @@ class ClientRegistrationHandlerUnitTest extends UnitTestBase {
                 .isEqualTo(BigDecimal.valueOf(1.1));
     }
 
-    @Test
-    void shouldDetectDuplicate() {
-        ClientRegistrationDto dto = new ClientRegistrationDto()
-                .setName("John")
-                .setSurname("Black")
-                .setWage(BigDecimal.ONE)
-                .setEventTime(Instant.parse("2018-11-30T18:35:24.00Z"));
-
-        when(clientRepository.findAllByEventTime(Instant.parse("2018-11-30T18:35:24.00Z")))
-                .thenReturn(List.of(
-                                new Client().setName("John")
-                                        .setSurname("Black")
-                                        .setWage(BigDecimal.valueOf(1.1))
-                        )
-                );
-
-        registrationHandler.process(dto);
-
-        verify(clientRepository, never()).save(any());
-    }
-
 }
