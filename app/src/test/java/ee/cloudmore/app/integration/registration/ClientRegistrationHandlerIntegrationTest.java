@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.TestPropertySource;
 
 import java.math.BigDecimal;
-import java.time.OffsetDateTime;
+import java.time.Instant;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -26,14 +26,14 @@ class ClientRegistrationHandlerIntegrationTest extends IntegrationTestBase {
                 .setName("John")
                 .setSurname("Black")
                 .setWage(BigDecimal.TEN)
-                .setEventTime(OffsetDateTime.parse("2017-12-03T10:15:30+01:00"));
+                .setEventTime(Instant.parse("2018-11-30T18:35:24.00Z"));
 
         Client savedClient = clientRegistrationHandler.process(dto);
 
         assertNotNull(savedClient.getUuid());
         assertThat(savedClient.getName()).isEqualTo("John");
         assertThat(savedClient.getSurname()).isEqualTo("Black");
-        assertThat(savedClient.getEventTime()).isEqualTo(OffsetDateTime.parse("2017-12-03T10:15:30+01:00"));
+        assertThat(savedClient.getEventTime()).isEqualTo(Instant.parse("2018-11-30T18:35:24.00Z"));
         assertThat(savedClient.getWage())
                 .usingComparator(BigDecimal::compareTo)
                 .isEqualTo(BigDecimal.valueOf(14));

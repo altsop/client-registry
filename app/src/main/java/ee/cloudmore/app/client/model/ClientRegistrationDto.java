@@ -6,7 +6,7 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
-import java.time.OffsetDateTime;
+import java.time.Instant;
 
 @Data
 @Validated
@@ -27,6 +27,6 @@ public class ClientRegistrationDto {
     private BigDecimal wage;
 
     @NotNull
-    private OffsetDateTime eventTime;
+    private Instant eventTime;
 
 }

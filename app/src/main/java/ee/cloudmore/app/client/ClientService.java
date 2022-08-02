@@ -1,7 +1,7 @@
 package ee.cloudmore.app.client;
 
 import ee.cloudmore.app.client.model.ClientRegistrationDto;
-import ee.cloudmore.app.client.queue.ClientSender;
+import ee.cloudmore.app.client.queue.ClientProducer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ClientService {
 
-    private final ClientSender clientSender;
+    private final ClientProducer clientProducer;
 
     public void registerClient(ClientRegistrationDto clientRegistrationDto) {
-        clientSender.sendClientRegistrationMessage(clientRegistrationDto);
+        clientProducer.sendClientRegistrationMessage(clientRegistrationDto);
     }
 
 }

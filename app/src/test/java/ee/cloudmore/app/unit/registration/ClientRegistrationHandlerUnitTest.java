@@ -13,11 +13,11 @@ import org.mockito.Captor;
 import org.mockito.Mock;
 
 import java.math.BigDecimal;
-import java.time.OffsetDateTime;
+import java.time.Instant;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class ClientRegistrationHandlerUnitTest extends UnitTestBase {
 
@@ -49,7 +49,7 @@ class ClientRegistrationHandlerUnitTest extends UnitTestBase {
                 .setName("John")
                 .setSurname("Black")
                 .setWage(BigDecimal.ONE)
-                .setEventTime(OffsetDateTime.parse("2017-12-03T10:15:30+01:00"));
+                .setEventTime(Instant.parse("2018-11-30T18:35:24.00Z"));
 
         registrationHandler.process(dto);
         verify(clientRepository).save(clientArgumentCaptor.capture());
@@ -57,10 +57,31 @@ class ClientRegistrationHandlerUnitTest extends UnitTestBase {
 
         assertThat(clientToBeSaved.getName()).isEqualTo("John");
         assertThat(clientToBeSaved.getSurname()).isEqualTo("Black");
-        assertThat(clientToBeSaved.getEventTime()).isEqualTo(OffsetDateTime.parse("2017-12-03T10:15:30+01:00"));
+        assertThat(clientToBeSaved.getEventTime()).isEqualTo(Instant.parse("2018-11-30T18:35:24.00Z"));
         assertThat(clientToBeSaved.getWage())
                 .usingComparator(BigDecimal::compareTo)
                 .isEqualTo(BigDecimal.valueOf(1.1));
+    }
+
+    @Test
+    void shouldDetectDuplicate() {
+        ClientRegistrationDto dto = new ClientRegistrationDto()
+                .setName("John")
+                .setSurname("Black")
+                .setWage(BigDecimal.ONE)
+                .setEventTime(Instant.parse("2018-11-30T18:35:24.00Z"));
+
+        when(clientRepository.findAllByEventTime(Instant.parse("2018-11-30T18:35:24.00Z")))
+                .thenReturn(List.of(
+                                new Client().setName("John")
+                                        .setSurname("Black")
+                                        .setWage(BigDecimal.valueOf(1.1))
+                        )
+                );
+
+        registrationHandler.process(dto);
+
+        verify(clientRepository, never()).save(any());
     }
 
 }
