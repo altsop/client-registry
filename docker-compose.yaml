@@ -35,24 +35,19 @@ services:
       MYSQL_USER: 'mysql'
       MYSQL_PASSWORD: 'mysql'
       MYSQL_ROOT_PASSWORD: 'mysql'
-      TZ: 'Europe/London'
     ports:
       - '3306:3306'
     expose:
       - '3306'
 
   app:
-    image: app4
+    image: app
     container_name: client-registry
     ports:
       - '8099:8099'
-    links:
-      - "mysql"
-      - "broker"
-      - "zookeeper"
     environment:
       - spring.profiles.active=prod
     depends_on:
-      - "mysql"
-      - "broker"
-      - "zookeeper"
+      - mysql
+      - broker
+      - zookeeper
