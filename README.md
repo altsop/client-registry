@@ -20,7 +20,7 @@ Flow:
 
 Url: http://localhost:8099/swagger-ui/index.html#
 
-## Deployment 
+## Deployment
 
 1. run docker build -t app .
 2. run docker-compose up -d

@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 
@@ -43,8 +42,7 @@ public class ClientRegistrationHandler {
     }
 
     private boolean isDuplicate(ClientRegistrationDto clientRegistrationDto, BigDecimal wageWithTax) {
-        List<Client> clients = clientRepository.findAllByEventTime(
-                clientRegistrationDto.getEventTime().truncatedTo(ChronoUnit.SECONDS));
+        List<Client> clients = clientRepository.findAllByEventTime(clientRegistrationDto.getEventTime());
         return clients.stream()
                 .anyMatch(client -> client.getName().equals(clientRegistrationDto.getName()) &&
                         client.getSurname().equals(clientRegistrationDto.getSurname()) &&
